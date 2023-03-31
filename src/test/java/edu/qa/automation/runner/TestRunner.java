@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
 @CucumberOptions(
-        plugin = {"pretty", "json:build/reports/cucumber.json"},
+        plugin = {"pretty", "json:build/reports/cucumber.json", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"},
         features = "classpath:features",
         glue = {"edu.qa.automation"},
         tags = "not @manual"

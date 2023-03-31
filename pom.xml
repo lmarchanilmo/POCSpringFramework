@@ -19,6 +19,11 @@
         <webdrivermanager.version>4.4.3</webdrivermanager.version>
         <maven.failsafe.plugin.version>2.22.1</maven.failsafe.plugin.version>
         <maven.surfire.plugin.version>2.22.1</maven.surfire.plugin.version>
+        <allure.version>2.14.0</allure.version>
+        <aspectj.version>1.9.6</aspectj.version>
+        <allure.maven.version>2.10.0</allure.maven.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <threads></threads>
     </properties>
     <build>
         <plugins>
@@ -39,7 +44,7 @@
                         <include>**/TestRunner</include>
                     </includes>
                     <parallel>methods</parallel>
-                    <threadCount>8</threadCount>
+                    <threadCount>${threads}</threadCount>
                     <forkCount>1</forkCount>
                     <perCoreThreadCount>false</perCoreThreadCount>
                     <argLine>-Duser.language=en</argLine>
@@ -48,7 +53,15 @@
                     <argLine>-XX:MaxPermSize=4096m</argLine>
                     <argLine>-XX:-UseGCOverheadLimit</argLine>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <goals>
@@ -58,9 +71,57 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.maven.version}</version>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber6-jvm</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>${allure.maven.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-assertj</artifactId>
+            <version>${allure.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
