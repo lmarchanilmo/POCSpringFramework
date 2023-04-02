@@ -1,5 +1,6 @@
 Feature: Second Feature
 
+  @regression @smoke
   Scenario: Easy Access Scenario
     Given I Login into the application
     When I navigate to "EASY_ACCESS" Module
