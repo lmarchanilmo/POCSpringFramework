@@ -3,10 +3,12 @@ package edu.qa.automation.steps.support;
 import edu.qa.automation.configuration.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Service;
 
 @PropertySource({
         "classpath:config/${environment}.properties"
@@ -25,7 +27,11 @@ public class Hooks {
     }
 
     @After
-    public void teardown(){
-        //driverManager.quitDriver();
+    public void teardown(Scenario scenario){
+        if(scenario.isFailed()){
+            byte[] screenshot = ((TakesScreenshot)driverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", scenario.getName());
+        }
+        driverManager.quitDriver();
     }
 }
