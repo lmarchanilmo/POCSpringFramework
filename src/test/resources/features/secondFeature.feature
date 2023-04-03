@@ -7,5 +7,5 @@ Feature: Second Feature
     Then I select the Administration Option "Companies" in EASY_ACCESS
     And I check row for the following criteria
       | Name      |
-      | Ecopetrol |
+      | Ecopetrol124 |
 
