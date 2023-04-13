@@ -5,11 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @ConditionalOnProperty(name = "browser", havingValue = "chrome")
+@PropertySource({
+        "classpath:config/${environment}.properties"
+})
 public class ChromeDriverManager extends DriverManager{
 
     @Override

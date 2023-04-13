@@ -8,11 +8,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
-@PropertySource({
-        "classpath:config/${environment}.properties"
-})
+//@PropertySource({
+//        "classpath:config/${environment}.properties"
+//})
 public class Hooks {
 
     @Autowired
