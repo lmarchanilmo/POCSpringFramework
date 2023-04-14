@@ -1,19 +1,13 @@
 package edu.qa.automation.steps;
 
-import edu.qa.automation.utils.MainMenuItem;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.openqa.selenium.devtools.v85.indexeddb.model.Key;
-import org.openqa.selenium.devtools.v85.runtime.model.RemoteObject;
-import org.openqa.selenium.devtools.v89.runtime.model.ObjectPreview;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThenSteps extends BaseStepDefinition{
+public class ThenSteps extends BaseStepDefinition {
 
     @Then("I select the Administration Option {string} in ALUDOC")
     public void iSelectTheAdministrationOptionInAludoc(String option) {
