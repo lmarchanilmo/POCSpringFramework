@@ -1,17 +1,22 @@
 package edu.qa.automation.steps;
 
-import edu.qa.automation.pages.Login;
-import edu.qa.automation.utils.MainMenuItem;
-import io.cucumber.java.en.And;
+import edu.qa.automation.preconditions.RemoveExistingPerson;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.IOException;
+import java.util.Collections;
 
 public class GivenSteps extends BaseStepDefinition{
 
+
+    @Autowired
+    RemoveExistingPerson removeExistingPerson;
+
     @Given("I Login into the application")
-    public void iLoginIntoTheApplication() {
+    public void iLoginIntoTheApplication() throws IOException {
+
+        removeExistingPerson.resolve(Collections.singletonMap("criteria", "Camilo123"));
 
         login.enterUsername("angela.valbuena")
                 .enterPassword("demo")
